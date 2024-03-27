@@ -1,0 +1,23 @@
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+yarn-error.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# Environment files
+.env
+
+# @nuxtjs/pwa
+sw.*
+
+#Other
+.DS_Store
+nuxt.config.js
+Icon?
