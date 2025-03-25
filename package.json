@@ -22,7 +22,7 @@
     "@supabase/supabase-js": "^2.49.3",
     "consola": "^3.4.2",
     "core-js": "^3.41.0",
-    "nuxt": "^2.18.1",
+    "nuxt": "^3.16.0",
     "smoothscroll-polyfill": "^0.4.4",
     "swiper": "^11.2.6",
     "tiny-cookie": "^2.3.2",
@@ -43,6 +43,6 @@
     "prettier": "^2.8.8",
     "sass": "^1.86.0",
     "sass-loader": "^10.5.2",
-    "webpack": "4"
+    "webpack": "5"
   }
 }
