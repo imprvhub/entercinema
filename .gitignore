@@ -1,6 +1,6 @@
 # dependencies
 node_modules
-
+#example
 # logs
 npm-debug.log
 yarn-error.log
