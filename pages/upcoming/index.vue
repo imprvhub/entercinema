@@ -143,7 +143,7 @@
           </div>
         </div>
         
-        <button @click="prevTrendingPage" :disabled="currentTrendingPage === 1" class="calendar-nav calendar-nav--left series-nav-left" style="position: relative; z-index:3 !important; bottom: 0.5rem !important; margin-left:1rem !important; top: -25px;">
+        <button @click="prevTrendingPage" :disabled="currentTrendingPage === 1" class="calendar-nav calendar-nav--left series-nav-left" style="position: relative; z-index:3 !important; bottom: 0.5rem !important; margin-left:1rem !important; top: -25px !important;">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M17.9 23.2L6.1 12 17.9.8"></path>
           </svg>
@@ -2444,5 +2444,9 @@ h3 {
   margin: 0 auto;
   bottom: 3rem;
   position: relative;
+}
+
+.series-nav--left {
+  top: -25px;
 }
 </style>
