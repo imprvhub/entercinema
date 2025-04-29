@@ -62,6 +62,10 @@
     <Hero
       :item="featured" />
 
+    <WatchlistRecommendationsCarousel
+      v-if="isLoggedIn"
+      title="Based on Your Watchlist" />
+
     <ListingCarousel
       v-if="trendingMovies && trendingMovies.results.length"
       :title="trendingMoviesTitle"
@@ -81,6 +85,7 @@ import { getTrending, getMovie, getTvShow, getListItem } from '~/api';
 import Hero from '~/components/Hero';
 import ListingCarousel from '~/components/ListingCarousel';
 import FeatureDescription from '~/components/FeatureDescription';
+import WatchlistRecommendationsCarousel from '~/components/WatchlistRecommendationsCarousel';
 import supabase from '@/services/supabase';
 
 async function getUserAvatar(userEmail) {
@@ -155,6 +160,7 @@ export default {
     FeatureDescription,
     Hero,
     ListingCarousel,
+    WatchlistRecommendationsCarousel,
   },
 
   methods: {
@@ -493,5 +499,4 @@ export default {
       margin-top: 30px; 
     }
   }
-
 </style>

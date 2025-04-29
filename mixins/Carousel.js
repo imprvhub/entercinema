@@ -19,6 +19,12 @@ export default {
   mounted () {
     smoothscroll.polyfill();
     window.addEventListener('resize', this.resizeEvent);
+    
+    this.$nextTick(() => {
+      if (this.$refs.carouselElement && this.$refs.carouselElement.firstChild) {
+        this.calculateState();
+      }
+    });
   },
 
   beforeDestroy () {
@@ -26,7 +32,20 @@ export default {
   },
 
   methods: {
+    resizeEvent() {
+      this.$nextTick(() => {
+        if (this.$refs.carouselElement && this.$refs.carouselElement.firstChild) {
+          const numberOfItems = this.$refs.carouselElement.children.length;
+          this.calculateState(numberOfItems);
+        }
+      });
+    },
+
     calculateState (numberOfItems) {
+      if (!this.$refs.carouselElement || !this.$refs.carouselElement.firstChild) {
+        return;
+      }
+
       let unusableVisibleWidth = 72;
       const elementWidth = this.$refs.carouselElement.firstChild.getBoundingClientRect().width;
       const carouselWidth = numberOfItems * elementWidth;
@@ -48,6 +67,8 @@ export default {
     },
 
     moveTo (width) {
+      if (!this.$refs.carouselElement) return;
+      
       this.$refs.carouselElement.scrollTo({
         left: width,
         behavior: 'smooth',
@@ -55,6 +76,8 @@ export default {
     },
 
     moveToClickEvent (direction) {
+      if (!this.$refs.carouselElement) return;
+      
       const invisible = this.$refs.carouselElement.scrollLeft + (direction === 'left' ? -this.visibleWidth + 1 : this.visibleWidth);
       const remainder = invisible - invisible % this.elementWidth;
 
@@ -62,6 +85,8 @@ export default {
     },
 
     scrollEvent () {
+      if (!this.$refs.carouselElement) return;
+      
       const scrollLeft = this.$refs.carouselElement.scrollLeft;
       const end = this.maximumPosition - this.visibleWidth - this.elementWidth;
 
