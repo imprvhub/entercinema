@@ -36,10 +36,31 @@ export default {
         property: "og:url",
         content: "https://ivanluna.dev/",
       },
-
     ],
     link: [
+      // Main favicon
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      
+      // Standard favicon sizes
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
+      { rel: "icon", type: "image/png", sizes: "36x36", href: "/favicon-36.png" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48.png" },
+      { rel: "icon", type: "image/png", sizes: "57x57", href: "/favicon-57.png" },
+      { rel: "icon", type: "image/png", sizes: "60x60", href: "/favicon-60.png" },
+      { rel: "icon", type: "image/png", sizes: "72x72", href: "/favicon-72.png" },
+      { rel: "icon", type: "image/png", sizes: "76x76", href: "/favicon-76.png" },
+      { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96.png" },
+      { rel: "icon", type: "image/png", sizes: "192x192", href: "/favicon-192.png" },
+      
+      // Apple touch icons (precomposed versions for better iOS compatibility)
+      { rel: "apple-touch-icon", sizes: "72x72", href: "/favicon-72-precomposed.png" },
+      { rel: "apple-touch-icon", sizes: "114x114", href: "/favicon-114-precomposed.png" },
+      { rel: "apple-touch-icon", sizes: "120x120", href: "/favicon-120-precomposed.png" },
+      { rel: "apple-touch-icon", sizes: "144x144", href: "/favicon-144-precomposed.png" },
+      { rel: "apple-touch-icon", sizes: "152x152", href: "/favicon-152-precomposed.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon-180-precomposed.png" },
+      
+      // Fonts
       {
         rel: "stylesheet",
         href: "//fonts.googleapis.com/css?family=Roboto:300,400,500",
@@ -74,17 +95,48 @@ export default {
     baseURL: "/",
   },
 
-
-
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    icon: {
+      // Configure PWA icons to use your favicon files
+      source: 'static/favicon-192.png',
+      sizes: [64, 120, 144, 152, 192, 384, 512]
+    },
     manifest: {
       lang: "en",
       name: "EnterCinema",
       short_name: "EnterCinema",
       description: "Fast-track your entertainment picks.",
       theme_color: "#03496B",
-
+      background_color: "#03496B",
+      display: "standalone",
+      icons: [
+        {
+          src: "/favicon-192.png",
+          sizes: "192x192",
+          type: "image/png"
+        },
+        {
+          src: "/favicon-144-precomposed.png",
+          sizes: "144x144",
+          type: "image/png"
+        },
+        {
+          src: "/favicon-96.png",
+          sizes: "96x96",
+          type: "image/png"
+        },
+        {
+          src: "/favicon-72.png",
+          sizes: "72x72",
+          type: "image/png"
+        },
+        {
+          src: "/favicon-48.png",
+          sizes: "48x48",
+          type: "image/png"
+        }
+      ]
     },
   },
 
@@ -115,7 +167,6 @@ export default {
     GA: process.env.GA || "",
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || "",
   },
-
 
   // Customize the progress bar color
   loading: {
