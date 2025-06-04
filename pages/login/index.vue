@@ -9,7 +9,6 @@
         <div class="container-section">
           <h1 class="text-white text-center"><b>Welcome Back</b></h1>
           <h3 class="text-white text-center"><b>Sign in to your account:</b></h3>
-          <br>
           <div class="form">
             <form @submit.prevent="login"> 
               <GoogleLogin buttonText="Sign in with Google" />
