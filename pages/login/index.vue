@@ -11,7 +11,12 @@
           <h3 class="text-white text-center"><b>Sign in to your account:</b></h3>
           <br>
           <div class="form">
-            <form @submit.prevent="login">
+            <form @submit.prevent="login"> 
+              <GoogleLogin buttonText="Sign in with Google" />
+              <div class="divider">
+                <span>or</span>
+              </div>
+              
               <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" v-model="email" placeholder="johndoe@example.com" required>
@@ -34,11 +39,6 @@
                 <br>
               </div>
               
-              <div class="divider">
-                <span>or</span>
-              </div>
-              
-              <GoogleLogin buttonText="Sign in with Google" />
             </form>
             <br>
             <br>
