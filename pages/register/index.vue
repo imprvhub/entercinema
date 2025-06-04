@@ -9,9 +9,14 @@
         <div class="container-section">
           <h1 class="text-white text-center"><b>Get started</b></h1>
             <div v-if="!showVerificationModal">
-              <h3 class="text-white text-center"><b>Create a new account:</b></h3>
               <div class="form">
+
                 <form @submit.prevent="register">
+                  <GoogleLogin buttonText="Access with Google" />
+                  <div class="divider">
+                    <span>or</span>
+                  </div>
+                  <h3 class="text-white text-center"><b>Create a new account:</b></h3>
                   <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="name" id="name" v-model="name" placeholder="John Doe" required>
@@ -71,6 +76,7 @@
 
 <script>
 import axios from 'axios';
+import GoogleLogin from '@/components/global/GoogleLogin.vue';
 
 export default {
   data() {
