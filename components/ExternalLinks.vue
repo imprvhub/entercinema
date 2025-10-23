@@ -2,6 +2,40 @@
   <div class="external-links-container">
     <h4 class="section-title">Links Externos</h4>
     <div class="links-grid">
+      <div v-if="tomatoMeter.found && (currentPageType === 'movie' || currentPageType === 'tv')" class="link-item">
+        <a
+          :href="tomatoMeter.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Rotten Tomatoes"
+        >
+          <img
+            src="/rotten-tomatoes.svg"
+            alt="YTS"
+            class="link-icon rotten-tomatoes"
+            width="23"
+            height="23"
+          />
+          <span class="label-style">{{ tomatoMeter.score }}% Tomatometer</span>
+        </a>
+      </div>
+      <div v-if="ytsUrl && currentPageType === 'movie'" class="link-item">
+        <a
+          :href="ytsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit YTS"
+        >
+          <img
+            src="/yts-logo.svg"
+            alt="YTS"
+            class="link-icon yts-logo"
+            width="23"
+            height="23"
+          />
+          <span class="label-style">Watch on YTS</span>
+        </a>
+      </div>
       <div v-if="links.imdb_id && (currentPageType === 'movie' || currentPageType === 'tv')" class="link-item">
         <a
           :href="stremioLink"
@@ -181,6 +215,8 @@
 </template>
 
 <script>
+import { getYTSMovieByImdb, getMDBListRatings } from '@/api/index';
+
 export default {
   props: {
     media: {
@@ -192,6 +228,17 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  data() {
+    return {
+      ytsUrl: null,
+      tomatoMeter: {
+        found: false,
+        score: null,
+        url: ''
+      }
+    };
   },
 
   computed: {
@@ -212,6 +259,48 @@ export default {
       return `stremio://detail/${contentType}/${this.links.imdb_id}`;
     },
   },
+  mounted() {
+    if (this.links.imdb_id && this.currentPageType === 'movie') {
+      this.fetchYTSUrl();
+    }
+    if (this.links.imdb_id && (this.currentPageType === 'movie' || this.currentPageType === 'tv')) {
+      this.fetchTomatoMeter();
+    }
+  },
+
+  methods: {
+    async fetchYTSUrl() {
+      try {
+        const result = await getYTSMovieByImdb(this.links.imdb_id);
+        if (result.found) {
+          this.ytsUrl = result.url;
+        }
+      } catch (error) {
+        console.error('Error fetching YTS URL:', error);
+      }
+    },
+    async fetchTomatoMeter() {
+      try {
+        const result = await getMDBListRatings(this.links.imdb_id, this.currentPageType);
+        if (result.found) {
+          this.tomatoMeter = result;
+        }
+      } catch (error) {
+        console.error('Error fetching Tomato Meter:', error);
+      }
+    }
+  },
+
+  watch: {
+    'links.imdb_id': function(newVal) {
+      if (newVal && this.currentPageType === 'movie') {
+        this.fetchYTSUrl();
+      }
+      if (newVal && (this.currentPageType === 'movie' || this.currentPageType === 'tv')) {
+        this.fetchTomatoMeter();
+      }
+    }
+  }
 };
 </script>
 
@@ -293,5 +382,20 @@ export default {
 .stremio-icon {
   width: 28px !important;
   height: 28px !important;
+}
+
+.yts-logo {
+  filter: brightness(0) invert(1);
+  width: 23px !important;
+  height: 23px !important;
+}
+
+.rotten-tomatoes {
+  width: 23px !important;
+  height: 23px !important;
+}
+
+.tomato-icon {
+  color: #FA320A;
 }
 </style>
