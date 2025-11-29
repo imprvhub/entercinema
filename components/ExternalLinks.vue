@@ -255,16 +255,8 @@ export default {
     imdb() {
       return this.media === "person" ? "name" : "title";
     },
-    isMobile() {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    },
     stremioLink() {
       const contentType = this.currentPageType === "tv" ? "series" : "movie";
-      
-      if (this.isMobile) {
-        return `https://web.stremio.com/#/detail/${contentType}/${this.links.imdb_id}`;
-      }
-      
       return `stremio://detail/${contentType}/${this.links.imdb_id}`;
     },
   },
