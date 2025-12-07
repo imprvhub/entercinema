@@ -121,11 +121,9 @@ export default {
 
   methods: {
     async fetchYTSUrl() {
-      // Si no hay ID, cortamos ejecución
       if (!this.imdbId) return;
       
       this.ytsUrl = null;
-      // Ya no necesitamos try/catch aquí porque api/index.js maneja el error internamente
       const result = await getYTSMovieByImdb(this.imdbId);
       if (result.found) {
         this.ytsUrl = result.url;
