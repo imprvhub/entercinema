@@ -8,7 +8,7 @@
           :href="'https://vidsrc.to/embed/' + type + '/' + imdbId"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Watch on VidSRC"
+          aria-label="Ver en VidSRC"
         >
           <div class="link-icon vidsrc-logo"></div>
           <span class="label-style">VidSRC</span>
@@ -20,7 +20,7 @@
           :href="stremioLink"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Watch on Stremio"
+          aria-label="Ver en Stremio"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@
           :href="ytsUrl"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Visit YTS"
+          aria-label="Visitar YTS"
         >
           <div class="link-icon yts-logo"></div>
           <span class="label-style">YTS</span>
@@ -57,7 +57,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="provider-content"
-          :title="`Watch on ${provider.name}`"
+          :title="`Ver en ${provider.name}`"
         >
           <img 
             v-if="provider.logo_path"
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { getYTSMovieByImdb } from '~/api';
+import { getYTSMovieByImdb } from '~/utils/api';
 
 export default {
   name: 'WatchOn',
@@ -124,6 +124,7 @@ export default {
       if (!this.imdbId) return;
       
       this.ytsUrl = null;
+      
       const result = await getYTSMovieByImdb(this.imdbId);
       if (result.found) {
         this.ytsUrl = result.url;
