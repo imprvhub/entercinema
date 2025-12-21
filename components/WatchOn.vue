@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { getYTSMovieByImdb } from '~/api';
+import { getYTSMovieByImdb } from '~/utils/api';
 
 export default {
   name: 'WatchOn',
